@@ -2,20 +2,17 @@ version: '3'
 
 services:
   influxdb:
-          #image: influxdb:1.0
     image: influxdb:2.0.4
     ports:
       - "8086:8086"
     volumes:
-      - ./influxdb2:/var/lib/influxdb2
-        #- ./influxdb.conf:/etc/influxdb/influxdb.conf
-        #- ./types.db:/usr/share/collectd/types.db:ro
+      - influxdb-storage:/var/lib/influxdb2
     environment:
-      - DOCKER_INFLUXDB_INIT_ORG=myorg
-      - DOCKER_INFLUXDB_INIT_BUCKET=mybucket
-        #entrypoint:
-        #- /bin/cat
-        #- /etc/hosts
+      - DOCKER_INFLUXDB_INIT_MODE=setup      
+      - DOCKER_INFLUXDB_INIT_USERNAME=admin      
+      - DOCKER_INFLUXDB_INIT_PASSWORD=password      
+      - DOCKER_INFLUXDB_INIT_ORG=myorgname
+      - DOCKER_INFLUXDB_INIT_BUCKET=mybucketname
   grafana:
     image: grafana/grafana:latest
     ports:
@@ -23,3 +20,6 @@ services:
     volumes:
       - ./grafana:/var/lib/grafana
       - ./grafana.ini:/etc/grafana/grafana.ini
+
+volumes:
+  influxdb-storage:

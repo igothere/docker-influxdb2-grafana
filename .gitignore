@@ -1,0 +1,4 @@
+.history
+grafana/grafana.db
+grafana/csv
+grafana/png
