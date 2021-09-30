@@ -22,6 +22,7 @@ services:
     volumes:
       - ./grafana:/var/lib/grafana
       - ./grafana.ini:/etc/grafana/grafana.ini
+      - ./dashboards:/etc/grafana/provisioning/dashboards/
 
 volumes:
   influxdb-storage:
